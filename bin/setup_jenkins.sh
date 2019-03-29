@@ -10,7 +10,7 @@ fi
 #GUID=$1
 GUID=eac
 #REPO=$2
-REPO=https://github.com/echin3/ocp_tasks_homework.git
+REPO=https://github.com/echin3/ocp_tasks_homework
 #CLUSTER=$3
 CLUSTER=master.na311.openshift.opentlc.com
 
