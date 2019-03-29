@@ -18,6 +18,10 @@ echo "Setting up Jenkins in project ${GUID}-jenkins from Git Repo ${REPO} for Cl
 
 # Set up Jenkins with sufficient resources
 
+echo "S.O.B. prod tasks was last project, switching to eac-jenkins"
+
+oc project eac-jenkins
+
 oc new-app jenkins-persistent -p ENABLE_OAUTH=true -p MEMORY_LIMIT=2Gi -p VOLUME_CAPACITY=4Gi -p DISABLE_ADMINISTRATIVE_MONITORS=true
 
 # Create custom agent container image with skopeo
