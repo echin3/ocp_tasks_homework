@@ -39,11 +39,11 @@ items:
     source:
       type: "Git"
       git:
-        uri: "https://github.com/echin3/ocp_tasks_homework/tree/master/openshift-tasks"
+        uri: "https://github.com/echin3/ocp_tasks_homework/"
     strategy:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
-        jenkinsfilePath: Jenkinsfile
+        jenkinsfilePath: openshift-tasks/Jenkinsfile
 kind: List
 metadata: []" | oc create -f -n eac-jenkins
 
