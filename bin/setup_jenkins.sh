@@ -45,7 +45,9 @@ items:
       jenkinsPipelineStrategy:
         jenkinsfilePath: openshift-tasks/Jenkinsfile
 kind: List
-metadata: []" | oc create -f -n eac-jenkins
+metadata: []" | oc create -f -
+
+# HMM IS IT ACTUALLY DOING THE ABOVE??
 
 # Make sure that Jenkins is fully up and running before proceeding!
 while : ; do
