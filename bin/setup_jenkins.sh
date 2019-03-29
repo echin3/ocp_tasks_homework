@@ -18,14 +18,14 @@ echo "Setting up Jenkins in project ${GUID}-jenkins from Git Repo ${REPO} for Cl
 
 # Set up Jenkins with sufficient resources
 
-$(oc new-app jenkins-persistent -p ENABLE_OAUTH=true -p MEMORY_LIMIT=2Gi -p VOLUME_CAPACITY=4Gi -p DISABLE_ADMINISTRATIVE_MONITORS=true)
+oc new-app jenkins-persistent -p ENABLE_OAUTH=true -p MEMORY_LIMIT=2Gi -p VOLUME_CAPACITY=4Gi -p DISABLE_ADMINISTRATIVE_MONITORS=true
 
 # Create custom agent container image with skopeo
 
-$(oc new-build -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\nUSER root\nRUN yum install -y skopeo && yum clean all\nUSER 1001' --name=jenkins-agent-appdev -n eac-jenkins)
+oc new-build -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\nUSER root\nRUN yum install -y skopeo && yum clean all\nUSER 1001' --name=jenkins-agent-appdev -n eac-jenkins
 
 # Create pipeline build config pointing to the ${REPO} with contextDir `openshift-tasks`
-$(echo "apiVersion: v1
+echo "apiVersion: v1
 items:
 - kind: "BuildConfig"
   apiVersion: "v1"
@@ -41,7 +41,7 @@ items:
       jenkinsPipelineStrategy:
         jenkinsfilePath: openshift-tasks/Jenkinsfile
 kind: List
-metadata: []" | oc create -f -n eac-jenkins)
+metadata: []" | oc create -f -n eac-jenkins
 
 # Make sure that Jenkins is fully up and running before proceeding!
 while : ; do
