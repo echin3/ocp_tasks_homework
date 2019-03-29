@@ -12,7 +12,7 @@ GUID=eac
 #REPO=$2
 REPO=https://github.com/echin3/ocp_tasks_homework
 #CLUSTER=$3
-CLUSTER=master.na311.openshift.opentlc.com
+CLUSTER=na311.openshift.opentlc.com
 
 echo "Setting up Jenkins in project ${GUID}-jenkins from Git Repo ${REPO} for Cluster ${CLUSTER}"
 
