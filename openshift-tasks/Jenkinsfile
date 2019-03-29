@@ -22,6 +22,9 @@ podTemplate(
     // Checkout Source Code.
     stage('Checkout Source') {
       checkout scm
+    
+      checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/echin3/ocp_tasks_homework.git']]])
+
     }
 
     // Build the Tasks Service
@@ -42,6 +45,8 @@ podTemplate(
       stage('Build war') {
         echo "Building version ${devTag}"
 
+        sh "mvn clean package -DskipTests -s ../nexus_settings.xml"
+
         // TBD: Execute Maven Build
       }
 
@@ -52,6 +57,9 @@ podTemplate(
         echo "Running Unit Tests"
 
         // TBD: Execute Unit Tests
+
+        sh "mvn test -s ../nexus_settings.xml"
+
       }
 
       // Using Maven to call SonarQube for Code Analysis
@@ -59,6 +67,8 @@ podTemplate(
         echo "Running Code Analysis"
 
         // TBD: Execute Sonarqube Tests
+        sh "mvn sonar:sonar -Dsonar.host.url=http://sonarqube.gpte-hw-cicd.svc.cluster.local -Dsonar.projectName=${JOB_BASE_NAME} -Dsonar.projectVersion=${devTag} -s ../nexus_settings.xml"
+
       }
 
       // Publish the built war file to Nexus
@@ -66,6 +76,8 @@ podTemplate(
         echo "Publish to Nexus"
 
         // TBD: Publish to Nexus
+
+        sh "mvn deploy -DskipTests=true -DaltDeploymentRepository=nexus::default::http://nexus3.gpte-hw-cicd.svc.cluster.local:8081/repository/releases -s ../nexus_settings.xml"
       }
 
       // Build the OpenShift Image in OpenShift and tag it.
