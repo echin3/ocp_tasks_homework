@@ -43,11 +43,16 @@ items:
     strategy:
       type: "JenkinsPipeline"
       jenkinsPipelineStrategy:
+        env:
+        - name: GUID
+          value: ${GUID}
+        - name: CLUSTER
+          value: ${CLUSTER}
         jenkinsfilePath: openshift-tasks/Jenkinsfile
 kind: List
 metadata: []" | oc create -f -
 
-# HMM IS IT ACTUALLY DOING THE ABOVE??
+# HMM IS IT ACTUALLY DOING THE ABOVE?? ok now it is. need to pass in guid, and other env vars!!
 
 # Make sure that Jenkins is fully up and running before proceeding!
 while : ; do
