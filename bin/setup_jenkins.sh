@@ -22,7 +22,7 @@ echo "S.O.B. prod tasks was last project, switching to eac-jenkins"
 
 oc project eac-jenkins
 
-oc new-app jenkins-persistent -p ENABLE_OAUTH=true -p MEMORY_LIMIT=4Gi -p VOLUME_CAPACITY=6Gi -p DISABLE_ADMINISTRATIVE_MONITORS=true
+oc new-app jenkins-persistent -p ENABLE_OAUTH=true -p MEMORY_LIMIT=6Gi -p VOLUME_CAPACITY=12Gi -p DISABLE_ADMINISTRATIVE_MONITORS=true
 
 # Create custom agent container image with skopeo
 
