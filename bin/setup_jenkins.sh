@@ -26,7 +26,7 @@ oc new-app jenkins-persistent -p ENABLE_OAUTH=true -p MEMORY_LIMIT=4Gi -p VOLUME
 
 # Create custom agent container image with skopeo
 
-oc new-build -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\nUSER root\nRUN yum install -y skopeo && yum clean all\nUSER 1001' --name=jenkins-agent-appdev -n eac-jenkins
+oc new-build -D $'FROM docker.io/openshift/jenkins-agent-maven-35-centos7:v3.11\nUSER root\nRUN yum install -y skopeo && yum clean all\nUSER 1001' --name=skopeo-pod -n eac-jenkins
 
 # Create pipeline build config pointing to the ${REPO} with contextDir `openshift-tasks`
 echo "apiVersion: v1
