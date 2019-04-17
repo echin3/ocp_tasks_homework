@@ -67,7 +67,7 @@ podTemplate(
         echo "Running Code Analysis"
 
         // TBD: Execute Sonarqube Tests
-        sh "mvn sonar:sonar -Dsonar.host.url=http://sonarqube.gpte-hw-cicd.svc.cluster.local -Dsonar.projectName=${JOB_BASE_NAME} -Dsonar.projectVersion=${devTag} -s ../nexus_settings.xml"
+        sh "mvn sonar:sonar -Dsonar.host.url=http://sonarqube.gpte-hw-cicd.svc.cluster.local:9000 -Dsonar.projectName=${JOB_BASE_NAME} -Dsonar.projectVersion=${devTag} -s ../nexus_settings.xml"
 
       }
 
