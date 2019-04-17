@@ -36,9 +36,14 @@ podTemplate(
       def version = getVersionFromPom("pom.xml")
 
       // TBD Set the tag for the development image: version + build number
-      def devTag  = ""
+      def devTag  = "0.0-0"
       // Set the tag for the production image: version
-      def prodTag = ""
+      def prodTag = "0.0"
+      def destApp = "tasks-green"
+      def activeApp = ""
+      def devProject = "eac-tasks-dev"
+      def prodProject = "eac-tasks-prod"  
+      def prefix = "eac"
 
       // Using Maven build the war file
       // Do not run tests in this step
@@ -93,7 +98,7 @@ podTemplate(
         }
       }
     }
-      }
+  }
 
       // Deploy the built image to the Development Environment.
       stage('Deploy to Dev') {
@@ -126,10 +131,10 @@ podTemplate(
           while (rc.spec.replicas != rc.status.readyReplicas) {
             sleep 5
             rc = openshift.selector("rc", "tasks-${dc_version}").object()
+              }
+            }
           }
         }
-      }
-    }
       }
 
       // Copy Image to Nexus container registry
