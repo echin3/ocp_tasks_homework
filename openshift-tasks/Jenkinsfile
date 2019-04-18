@@ -39,7 +39,6 @@ podTemplate(
       def devTag  = "0.0-0"
       // Set the tag for the production image: version
       def prodTag = "0.0"
-      def destApp = "tasks-green"
       def devProject = "eac-tasks-dev"
       def prodProject = "eac-tasks-prod"  
       def prefix = "eac"
